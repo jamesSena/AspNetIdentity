@@ -43,6 +43,7 @@ namespace IdentityDev
                 .AddEntityFrameworkStores<AspNetIdentityContext>();
 
 
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

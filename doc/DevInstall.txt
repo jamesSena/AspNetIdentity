@@ -1,0 +1,4 @@
+Install-Package Microsoft.AspNetCore.Identity.UI
+Install-Package Oracle.EntityFrameworkCore -Version 2.18.0-beta3
+add-migration Inicial
+update-database
