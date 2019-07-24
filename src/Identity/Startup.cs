@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Identity.Areas.Identity.Data;
+using IdentityDev.Areas.Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Identity
+namespace IdentityDev
 {
     public class Startup
     {
@@ -35,7 +35,7 @@ namespace Identity
             });
 
             services.AddDbContext<AspNetIdentityContext>(options =>
-                  options.UseSqlServer(
+                  options.UseOracle(
                       Configuration.GetConnectionString("AspNetIdentityContextConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
@@ -57,6 +57,12 @@ namespace Identity
             {
                 app.UseExceptionHandler("/Error");
             }
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
