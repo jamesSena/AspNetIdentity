@@ -60,7 +60,6 @@ namespace IdentityDev
             }
 
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
