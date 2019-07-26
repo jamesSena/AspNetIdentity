@@ -10,21 +10,22 @@ using IdentityDev.Models;
 
 namespace IdentityDev.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
 
-        
+        [AllowAnonymous]
         public IActionResult Index()
         {
 
             return View();
         }
-        [Authorize]
+
         public IActionResult Privacy()
         {
             return View();
         }
-
+        [Authorize(Roles ="admin")]
         public IActionResult Secret()
         {
             try
