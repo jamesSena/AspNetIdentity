@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityDev.Areas.Identity.Data;
+using IdentityDev.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,9 +47,12 @@ namespace IdentityDev
 
 
             //Utilizando lambda
-            services.AddAuthorization(options => {
-                options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
-            });
+           services.AddAuthorization(options => {
+               options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
+               options.AddPolicy("PodeLer", policy => policy.Requirements.Add(new PermissaoNecessaria("PodeLer"))); ;
+               options.AddPolicy("PodeGravar", policy => policy.Requirements.Add(new PermissaoNecessaria("PodeGravar")));
+
+           });
 
             //Maneira tradicional
             //services.AddAuthorization(AuthorizationOptions);
