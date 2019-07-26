@@ -39,7 +39,7 @@ namespace IdentityDev.Controllers
             return View();
         }
 
-
+        [Authorize(Policy ="PodeExcluir")]
         public IActionResult SecretClaim()
         {
             return View("Secret");

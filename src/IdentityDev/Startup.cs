@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityDev.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -42,11 +43,31 @@ namespace IdentityDev
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDevContext>();
-                
+
+
+            //Utilizando lambda
+            services.AddAuthorization(options => {
+                options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
+            });
+
+            //Maneira tradicional
+            //services.AddAuthorization(AuthorizationOptions);
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
+
+        
+        private void AuthorizationOptions(AuthorizationOptions options)
+        {
+            options.AddPolicy("PodeExcluir", PodeExcluir);
+        }
+
+        private void PodeExcluir(AuthorizationPolicyBuilder policy)
+        {
+            policy.RequireClaim("PodeExcluir");
+        }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
