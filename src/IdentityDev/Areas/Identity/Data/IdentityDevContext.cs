@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentityDev.Areas.Identity.Data
 {
-    public class AspNetIdentityContext : IdentityDbContext<IdentityUser>
+    public class IdentityDevContext : IdentityDbContext<IdentityUser>
     {
-        public AspNetIdentityContext(DbContextOptions<AspNetIdentityContext> options)
+        public IdentityDevContext(DbContextOptions<IdentityDevContext> options)
             : base(options)
         {
         }

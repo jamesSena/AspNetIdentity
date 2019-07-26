@@ -8,8 +8,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 
 namespace IdentityDev.Migrations
 {
-    [DbContext(typeof(AspNetIdentityContext))]
-    partial class AspNetIdentityContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(IdentityDevContext))]
+    partial class IdentityDevContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

@@ -34,14 +34,14 @@ namespace IdentityDev
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AspNetIdentityContext>(options =>
+            services.AddDbContext<IdentityDevContext>(options =>
                   options.UseOracle(
                       Configuration.GetConnectionString("AspNetIdentityContextConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<AspNetIdentityContext>();
-
+                .AddEntityFrameworkStores<IdentityDevContext>();
+                
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -58,17 +58,18 @@ namespace IdentityDev
             {
                 app.UseExceptionHandler("/Error");
             }
+
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
-
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseAuthentication();
-            app.UseMvc();
         }
     }
 }

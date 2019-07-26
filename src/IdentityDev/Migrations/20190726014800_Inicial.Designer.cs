@@ -9,9 +9,9 @@ using Oracle.EntityFrameworkCore.Metadata;
 
 namespace IdentityDev.Migrations
 {
-    [DbContext(typeof(AspNetIdentityContext))]
-    [Migration("20190724204545_inicial")]
-    partial class inicial
+    [DbContext(typeof(IdentityDevContext))]
+    [Migration("20190726014800_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
