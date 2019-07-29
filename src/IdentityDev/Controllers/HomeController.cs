@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using IdentityDev.Models;
+using IdentityDev.Extensions;
 
 namespace IdentityDev.Controllers
 {
@@ -44,12 +45,13 @@ namespace IdentityDev.Controllers
         {
             return View("Secret");
         }
-
+        [Authorize(Policy = "PodeGravar")]
         public IActionResult SecretClaimGravar()
         {
             return View("Secret");
         }
 
+        [ClaimsAuthorize("Home","Secret")]
         public IActionResult ClaimsCustom()
         {
             return View("Secret");

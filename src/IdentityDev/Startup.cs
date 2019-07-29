@@ -57,7 +57,7 @@ namespace IdentityDev
             //Maneira tradicional
             //services.AddAuthorization(AuthorizationOptions);
 
-
+            services.AddSingleton<IAuthorizationHandler, PermissaoNecessariaHandler>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
