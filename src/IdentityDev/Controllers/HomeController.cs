@@ -51,7 +51,7 @@ namespace IdentityDev.Controllers
             return View("Secret");
         }
 
-        [ClaimsAuthorize("Home","Secret")]
+        [ClaimsAuthorize("Produto","ler")]
         public IActionResult ClaimsCustom()
         {
             return View("Secret");
