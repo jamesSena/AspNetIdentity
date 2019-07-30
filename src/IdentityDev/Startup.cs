@@ -20,17 +20,22 @@ namespace IdentityDev
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+
+        public Startup(IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+            var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(hostingEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings{hostingEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            Configuration = configBuilder.Build();
         }
 
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-
             services.AddAIdentityConfig(Configuration);
             services.AddAuthorizationConfig();
             services.ResolveDependencies();
