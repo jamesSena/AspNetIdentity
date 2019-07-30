@@ -30,6 +30,11 @@ namespace IdentityDev
                 .AddJsonFile($"appsettings{hostingEnvironment.EnvironmentName}.json", true, true)
                 .AddEnvironmentVariables();
 
+            if (hostingEnvironment.IsProduction())
+            {
+                configBuilder.AddUserSecrets<Startup>();
+            }
+
             Configuration = configBuilder.Build();
         }
 
